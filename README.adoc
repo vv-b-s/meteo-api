@@ -1,0 +1,75 @@
+= Little Red Ride Hut Meteo API
+
+This project aims to provide endpoints for the Weather station at the Little Red Ride Hut.
+
+Running the application should be fairly easy and simple just follow along.
+
+== Prerequisites
+
+To be able to run the application you will need the following:
+
+* https://adoptopenjdk.net/[JDK 8+]
+* https://dev.mysql.com/downloads/mysql/[MySQL Server]
+
+NOTE: If your don't want to install MySQL, you can run it as a Docker container by running the following command:
+`docker run --network="host" --name mysql-test -e MYSQL_ROOT_PASSWORD=admin -d mysql:5`
+ +
+ This will host MySQL server instance on port 3306 with user `root` and password `admin`
+
+To build/debug the application:
+
+* https://maven.apache.org/[Apache Maven 3]
+
+== Building and running the application
+
+=== 1. Setting up the database
+After you install the required dependencies you will need to create the database to which the application will connect to:
+
+1) Open mysql console.
+
+[source, shell]
+----
+mysql -u root -p
+----
+
+2) Create the database for the station data.
+
+[source, sql]
+----
+CREATE DATABASE meteo CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+----
+
+=== 2. Building the application.
+
+The application is built by running `mvn package` in the project root.
+After build is complete you'll end up with the file `target/lrrhut-meteo-runner.jar`.
+The package contains all the dependencies needed for the app to run.
+
+=== 3. Running the application.
+
+After `lrrhut-meteo-runner.jar` is created you can run it by executing `java -jar` with the following parameters:
+
+* `-Dquarkus.datasource.username=<db_user>` - the username for the database
+* `-Dquarkus.datasource.password=<db_password>` - password for the database
+* `-Dstation.id=<station_id>` - the id of the weather station which is passed by the station's GET requests
+* `-Dstation.password=<station_password>` - the password of the weather station which is passed by the station's GET requests
+
+NOTE: You can set those as environment variables by using uppercase naming (e.g. `export QUARKUS_DATASOURCE_USERNAME=<db_uder>`)
+
+An example for command that runs the application would be:
+
+[source, shell]
+----
+java -Dquarkus.datasource.username=root -Dquarkus.datasource.password=admin -Dstation.id=station -Dstation.password=12345 -jar /loc/to/lrrhut-meteo-runner.jar
+----
+
+The application should be listening on port `8080`
+
+=== 4. Testing and debugging the application.
+
+To test and debug the application simply execute: `./mvnw compile -Dquarkus.datasource.username=root -Dquarkus.datasource.password=admin -Dstation.id=station -Dstation.password=12345 quarkus:dev`.
+
+Debug port is `5005`
+
+NOTE: Once you enter debug mode, feel free to modify the coda as you wish without stopping the application.
+`quarkus:dev` allows hot swapping in the matter of milliseconds once you make a request to the server.
