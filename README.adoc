@@ -1,6 +1,6 @@
-= Little Red Ride Hut Meteo API
+= Little Red Riding Hood Hut Meteo API
 
-This project aims to provide endpoints for the Weather station at the Little Red Ride Hut.
+This project aims to provide endpoints for the Weather station at the Red Riding Hood Hut.
 
 Running the application should be fairly easy and simple just follow along.
 
@@ -54,14 +54,14 @@ After `lrrhut-meteo-runner.jar` is created you can run it by executing `java -ja
 * `-Dstation.id=<station_id>` - the id of the weather station which is passed by the station's GET requests
 * `-Dstation.password=<station_password>` - the password of the weather station which is passed by the station's GET requests
 
-NOTE: You can set those as environment variables by using uppercase naming (e.g. `export QUARKUS_DATASOURCE_USERNAME=<db_uder>`)
-
 An example for command that runs the application would be:
 
 [source, shell]
 ----
 java -Dquarkus.datasource.username=root -Dquarkus.datasource.password=admin -Dstation.id=station -Dstation.password=12345 -jar /loc/to/lrrhut-meteo-runner.jar
 ----
+
+NOTE: You can also set those as environment variables by using uppercase naming (e.g. `export QUARKUS_DATASOURCE_USERNAME=<db_uder>`)
 
 The application should be listening on port `8080`
 
@@ -71,5 +71,5 @@ To test and debug the application simply execute: `./mvnw compile -Dquarkus.data
 
 Debug port is `5005`
 
-NOTE: Once you enter debug mode, feel free to modify the coda as you wish without stopping the application.
+NOTE: Once you enter debug mode, feel free to modify the code as you wish without stopping the application.
 `quarkus:dev` allows hot swapping in the matter of milliseconds once you make a request to the server.
