@@ -78,7 +78,7 @@ NOTE: You can also set those properties as environment variables by using upperc
  If you need to change the database connection string you can do it from the `application.properties` or provide it as a system/environment variable as well.
  By default a connection string is given in `application.properties`
 
-The application should be listening on port `8080`
+The application should be listening on port `8088`
 
 === 4. Testing and debugging the application.
 

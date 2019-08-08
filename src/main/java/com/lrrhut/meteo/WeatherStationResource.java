@@ -9,7 +9,6 @@ import javax.transaction.Transactional;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -17,7 +16,6 @@ import java.util.List;
 import static javax.ws.rs.core.Response.Status.UNAUTHORIZED;
 
 @RequestScoped
-@Consumes("*/*")
 @Path("weatherstation")
 public class WeatherStationResource {
 
@@ -51,8 +49,8 @@ public class WeatherStationResource {
     @Path("current")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getCurrent() {
-        return Response.ok(StationData.find(StationData.FIND_ALL_BY_DATE_DESC)
-                .firstResult()).build();
+        return Response.ok(new StationData[] {StationData.find(StationData.FIND_ALL_BY_DATE_DESC)
+                .firstResult()}).build();
     }
 
     /**

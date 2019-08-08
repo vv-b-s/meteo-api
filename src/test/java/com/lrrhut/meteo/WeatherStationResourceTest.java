@@ -95,7 +95,7 @@ public class WeatherStationResourceTest {
         StationDataDTO stationData = given().when()
                 .get(WEATHER_STATION_RESOURCE + "/current")
                 .then().statusCode(200)
-                .extract().body().as(StationDataDTO.class);
+                .extract().body().as(StationDataDTO[].class)[0];
 
         assertStationData(stationData, testData2);
     }
